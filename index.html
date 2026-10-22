@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>作息看板 · 家庭节奏</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>家庭作息看板</h1>
+    <p class="subtitle">用数据看见节奏，而不是用说教改变它</p>
+  </header>
+
+  <section class="date-nav">
+    <button id="prevDay" class="nav-btn" aria-label="前一天">←</button>
+    <input type="date" id="dateInput" class="date-input">
+    <button id="nextDay" class="nav-btn" aria-label="后一天">→</button>
+    <button id="todayBtn" class="nav-btn ghost">今天</button>
+  </section>
+
+  <main>
+    <section class="card">
+      <h2>今日规律</h2>
+      <div class="timeline-wrap">
+        <div class="timeline-labels">
+          <span>0</span><span>3</span><span>6</span><span>9</span><span>12</span><span>15</span><span>18</span><span>21</span><span>24</span>
+        </div>
+        <div class="timeline" id="timeline"></div>
+        <div class="legend">
+          <span><i class="dot sleep"></i>睡眠</span>
+          <span><i class="dot meal"></i>用餐</span>
+          <span><i class="dot screen"></i>屏幕</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>记录</h2>
+      <form id="entryForm" class="entry-form">
+        <div class="field">
+          <label for="wakeTime">起床</label>
+          <input type="time" id="wakeTime" required>
+        </div>
+        <div class="field">
+          <label for="sleepTime">就寝</label>
+          <input type="time" id="sleepTime" required>
+        </div>
+        <div class="field">
+          <label for="breakfast">早餐</label>
+          <input type="time" id="breakfast">
+        </div>
+        <div class="field">
+          <label for="lunch">午餐</label>
+          <input type="time" id="lunch">
+        </div>
+        <div class="field">
+          <label for="dinner">晚餐</label>
+          <input type="time" id="dinner">
+        </div>
+        <div class="field">
+          <label for="screen">屏幕（分钟）</label>
+          <input type="number" id="screen" min="0" max="1440" step="5" placeholder="例如 90">
+        </div>
+        <button type="submit" class="save-btn">保存今日</button>
+      </form>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="card">
+      <h2>一周趋势</h2>
+      <div class="trend-wrap">
+        <svg id="trendChart" viewBox="0 0 640 240" preserveAspectRatio="none" role="img" aria-label="近一周屏幕时间与睡眠时长趋势"></svg>
+      </div>
+      <p class="trend-summary" id="trendSummary"></p>
+    </section>
+
+    <section class="card">
+      <h2>周报</h2>
+      <pre id="reportText" class="report-text"></pre>
+      <div class="report-actions">
+        <button id="exportBtn" class="save-btn">复制周报文本</button>
+        <button id="clearBtn" class="save-btn ghost">清空全部数据</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p class="footer-note">数据仅保存在本机浏览器 localStorage，不上传任何服务器。</p>
+  </footer>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
